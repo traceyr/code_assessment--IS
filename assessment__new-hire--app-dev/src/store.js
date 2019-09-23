@@ -48,11 +48,6 @@ export default new Vuex.Store({
           });
         },
         checkBasicToken: function( { commit, state }, token ) {
-
-          // TODO remove return, actually implement basic authentication
-            return;
-          // TODO end remove return
-
           return axios({
             method: 'GET',
             url: `${API_ENDPOINT}/check`,

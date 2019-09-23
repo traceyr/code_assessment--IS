@@ -21,6 +21,7 @@
 
 import Spinner from "@/components/spinner";
 
+const API_URL = 'http://localhost:5000/check';
 export default {
     name: 'Login',
     data: () => {
@@ -39,6 +40,8 @@ export default {
                 const bearerToken = btoa( `${this.credentials.username}:${this.credentials.password}` );
                 this.working = true;
                 this.$store.dispatch( 'checkBasicToken', bearerToken ).then( ( resp ) => {
+                    console.log(resp);
+                    console.log('tardis');
                     this.working = false;
                     this.$store.commit( 'submitBasicToken', bearerToken );
                 }).catch( ( err ) => {
