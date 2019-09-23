@@ -10,7 +10,6 @@ import testData from '@/data/test-data';
 
 export default new Vuex.Store({
     state: {
-        // TODO don't use testData
         events: {},
         basicToken: false
     },
