@@ -23,7 +23,7 @@ app.use('/check', basicAuth);
 
 app.use('/list', listEventsRouter);
 app.use('/create', createRouter);
-app.use('/delete', deleteRouter);
+app.use('/delete/', deleteRouter);
 app.use('/update', modifyRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

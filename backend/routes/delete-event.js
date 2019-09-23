@@ -4,9 +4,15 @@ const router = require('express').Router();
 const axios = require('axios');
 const common = require('../lib/commonRoutes.js');
 
-router.delete('/', (req, res, next) => {
-  let rowKey = '123';
-  axios.delete(`${common.baseUrl}/remove/${rowKey}`, { headers: common.headers })
+router.delete('/:rowKey', (req, res, next) => {
+  console.log(req.params.rowKey);
+  console.log('in delete');
+  axios.delete(`${common.baseUrl}/remove/${req.params.rowKey}`, {
+    headers: {
+      'Content-Type' : 'application/json',
+      'X-API-KEY' : process.env.API_KEY
+    }
+  })
     .then(results => {
       console.log('results');
       console.log(results.data);

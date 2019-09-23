@@ -7,10 +7,12 @@ const common = require('../lib/commonRoutes.js');
 let rowKey = '973';
 //
 router.get('/', (req, res, next) => {
-  axios.get(`${common.baseUrl}/read/${rowKey}`, { headers: {
-    'Content-Type' : 'application/json',
-    'X-API-KEY' : process.env.API_KEY
-  } })
+  axios.get(`${common.baseUrl}/read/${rowKey}`, {
+    headers: {
+      'Content-Type' : 'application/json',
+      'X-API-KEY' : process.env.API_KEY
+    }
+  })
     .then(results => {
       console.log(results.data);
       res.send(results.data);
