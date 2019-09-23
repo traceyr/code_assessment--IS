@@ -11,7 +11,7 @@ import testData from '@/data/test-data';
 export default new Vuex.Store({
     state: {
         // TODO don't use testData
-        events: testData,//{},
+        events: {},
         basicToken: false
     },
     mutations: {
@@ -19,6 +19,8 @@ export default new Vuex.Store({
             state.basicToken = `basic ${token}`;
         },
         updateList: function( state, list ) {
+            console.log(list);
+            console.log('tardis update')
             state.events = list;
         }
     },
@@ -55,11 +57,6 @@ export default new Vuex.Store({
           });
         },
         getList: function( { commit, state } ) {
-
-          // TODO remove return, actually implement endpoint
-            return;
-          // TODO end remove return
-
           axios({
             method: 'GET',
             url: `${API_ENDPOINT}/list`,
