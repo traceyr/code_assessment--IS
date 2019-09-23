@@ -12,7 +12,10 @@
 I created a NodeJS Express backend. For authentication, I used the npm package `basic-auth`. I hid my credentials in a .env file and use the npm dotenv package for environmental variables so credentials would be hidden when I pushed in the backend.
 
 # With More time
-TARDIS:::
- testing using mocha chai
- more frontend design
- more in depth understanding of vue
+ - finish checking for overlap
+ - fix date error
+ - testing using mocha chai
+ - more frontend design
+ - more in depth understanding of vue
+ - cleanup of code
+ - put more code into reusable chunks(headers were not working so moved it out of commonRoutes)

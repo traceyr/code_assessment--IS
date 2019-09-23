@@ -4,27 +4,7 @@ const router = require('express').Router();
 const axios = require('axios');
 const common = require('../lib/commonRoutes.js');
 
-let rowKey = '973';
-//
-router.get('/', (req, res, next) => {
-  axios.get(`${common.baseUrl}/read/${rowKey}`, {
-    headers: {
-      'Content-Type' : 'application/json',
-      'X-API-KEY' : process.env.API_KEY
-    }
-  })
-    .then(results => {
-      console.log(results.data);
-      res.send(results.data);
-    })
-    .catch(err => {
-      console.log(err.response);
-      res.send(err.response.data);
-    });
-});
-
 router.post('/', (req, res, next) => {
-  console.log('in put');
   let newDate = req.body.dateTime;
   let justDate = newDate.split('T')[0] + 'T00:00:00.0000Z' ;
   let sendDataJSON = {
@@ -42,11 +22,9 @@ router.post('/', (req, res, next) => {
     'X-API-KEY' : process.env.API_KEY
   }})
     .then(results => {
-      console.log(results.data);
       res.send(results.data);
     })
     .catch(err => {
-      console.log(err.response);
       res.send(err.response.data);
     });
 });

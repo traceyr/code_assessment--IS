@@ -2,11 +2,14 @@
 
 const router = require('express').Router();
 const axios = require('axios');
-const common = require('../lib/commonRoutes.js');
+const common = require('../lib/commonRoutes');
+const peek = require('./get-all-events');
+const Service = require('../lib/checkForOverlap');
 
 router.post('/', (req, res, next) => {
+  let list;
   let newDate = req.body.dateTime;
-  let justDate = newDate.split('T')[0] + 'T00:00:00.0000Z' ;
+  let justDate = newDate.split('T')[0] + 'T00:00:00.0000Z';
   let sendDataJSON = {
     'data': {
       'id': req.body.id,
@@ -17,7 +20,6 @@ router.post('/', (req, res, next) => {
       'brief': req.body.brief,
     }
   };
-  console.log('here');
   axios.post(`${common.baseUrl}/create/${req.body.id}`, sendDataJSON, {
     headers: {
       'Content-Type' : 'application/json',
@@ -25,13 +27,9 @@ router.post('/', (req, res, next) => {
     }
   })
     .then(results => {
-      console.log(results);
-      console.log('in here');
       res.send(results.data);
     })
     .catch(err => {
-      console.log(err);
-      console.log('in err');
       res.send(err);
 
     });

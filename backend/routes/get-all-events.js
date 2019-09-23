@@ -16,6 +16,7 @@ router.get('/', (req, res, next) => {
       let resultMsg = results.data.message;
       for(let i = 0; i < resultMsg.length; i++) {
         let dateFromResults =  resultMsg[i].data.date;
+        console.log(dateFromResults);
         if(resultsArr.some(result => result.date && result.date === dateFromResults)) {
           let event = {
             id: resultMsg[i].name,
@@ -44,6 +45,7 @@ router.get('/', (req, res, next) => {
         }
       }
       res.send(resultsArr);
+      return resultsArr;
     })
     .catch(err => {
       console.log(err);
