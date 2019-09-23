@@ -6,7 +6,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 let listEventsRouter = require('./routes/get-all-events');
-let updateRouter = require('./routes/create-event');
+let createRouter = require('./routes/create-event');
 let deleteRouter = require('./routes/delete-event');
 let modifyRouter = require('./routes/get-one-event');
 
@@ -20,9 +20,10 @@ app.use(bodyParser.urlencoded({  extended: true }));
 app.use(cors());
 app.use('/check', basicAuth);
 
+
 app.use('/list', listEventsRouter);
-app.use('/update', updateRouter);
+app.use('/create', createRouter);
 app.use('/delete', deleteRouter);
-app.use('/modify', modifyRouter);
+app.use('/update', modifyRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

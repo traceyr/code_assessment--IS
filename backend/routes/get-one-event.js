@@ -5,9 +5,12 @@ const axios = require('axios');
 const common = require('../lib/commonRoutes.js');
 
 let rowKey = '973';
-
+//
 router.get('/', (req, res, next) => {
-  axios.get(`${common.baseUrl}/read/${rowKey}`, { headers: common.headers })
+  axios.get(`${common.baseUrl}/read/${rowKey}`, { headers: {
+    'Content-Type' : 'application/json',
+    'X-API-KEY' : process.env.API_KEY
+  } })
     .then(results => {
       console.log(results.data);
       res.send(results.data);
@@ -18,18 +21,24 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.put('/', (req, res, next) => {
+router.post('/', (req, res, next) => {
+  console.log('in put');
+  let newDate = req.body.dateTime;
+  let justDate = newDate.split('T')[0] + 'T00:00:00.0000Z' ;
   let sendDataJSON = {
     'data': {
-      'date':'2019-01-01T00:00:00.0000Z',
-      'name': 'An Event',
-      'dateTime': '2019-01-01T16:00:00.0000Z',
-      'duration': '60',
-      'brief': 'This is an event description'
+      'id': req.body.id,
+      'date': justDate,
+      'name': req.body.name,
+      'dateTime': req.body.dateTime,
+      'duration': req.body.duration,
+      'brief': req.body.brief,
     }
   };
-
-  axios.put(`${common.baseUrl}/update/${rowKey}`, sendDataJSON, { headers: common.headers })
+  axios.put(`${common.baseUrl}/update/${req.body.id}`, sendDataJSON, { headers: {
+    'Content-Type' : 'application/json',
+    'X-API-KEY' : process.env.API_KEY
+  }})
     .then(results => {
       console.log(results.data);
       res.send(results.data);
